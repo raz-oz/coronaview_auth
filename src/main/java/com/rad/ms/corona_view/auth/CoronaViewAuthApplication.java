@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.*;
 import org.springframework.boot.context.event.*;
 import org.springframework.context.*;
 import org.springframework.core.env.*;
+import com.rad.ms.corona_view.auth.aws.config.*;
 
 @SpringBootApplication
 public class CoronaViewAuthApplication implements ApplicationListener<ApplicationReadyEvent> {
@@ -15,7 +16,9 @@ public class CoronaViewAuthApplication implements ApplicationListener<Applicatio
     private ApplicationContext applicationContext;
     
 	public static void main(String[] args) {
-		SpringApplication.run(CoronaViewAuthApplication.class, args);
+        SpringApplication app = new SpringApplication(CoronaViewAuthApplication.class);
+        app.addListeners(new AwsAppListener());
+        app.run(args);
 	}
 
 	@Override
