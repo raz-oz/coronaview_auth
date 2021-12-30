@@ -48,20 +48,8 @@ public class AwsSnsPublisherImpl implements AwsSnsPublisher
 	
 	private SnsResponse sendSms(Message message, String phone)
 	{
-		try
-		{
-			PublishResponse pubTextSMS = smsSender.pubTextSMS(snsClient, AwsSesPublisher.HTMLBODY, phone);
-			return new SnsResponse(pubTextSMS.sdkHttpResponse().statusCode(), 
-								   pubTextSMS.responseMetadata().toString(), 
-								   pubTextSMS.messageId());
-		}
-		catch (Exception ex)
-		{
-			LOG.error("sendSms Failed", ex);
-		}
-		
-		return null;
-	}	
+		return smsSender.pubTextSMS(snsClient, AwsSesPublisher.HTMLBODY, phone);
+	}
 	
 	private SnsResponse sendMail(Message message)
 	{
